@@ -63,22 +63,14 @@ export const Select = (props: SelectProps) => {
 				data-testid='selectWrapper'>
 				<img src={arrowDown} alt='иконка стрелочки' className={styles.arrow} />
 				<div
-					className={clsx(
-						styles.placeholder,
-						(styles as Record<string, string>)[optionClassName]
-					)}
+					className={clsx(styles.placeholder, (styles as Record<string, string>)[optionClassName])}
 					data-status={status}
 					data-selected={!!selected?.value}
 					onClick={handlePlaceHolderClick}
 					role='button'
 					tabIndex={0}
 					ref={placeholderRef}>
-					<Text
-						family={
-							isFontFamilyClass(selected?.className)
-								? selected?.className
-								: undefined
-						}>
+					<Text family={isFontFamilyClass(selected?.className) ? selected?.className : undefined}>
 						{selected?.title || placeholder}
 					</Text>
 				</div>
