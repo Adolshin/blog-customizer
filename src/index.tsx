@@ -3,11 +3,8 @@ import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
-import {
-	ArticleParamsForm,
-	OptionProps,
-} from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState } from './constants/articleProps';
+import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
+import { defaultArticleState, ArticleStateType } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
@@ -16,34 +13,16 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-	// const [fontFamily, setFontFamily] = useState(fontFamilyOptions[0]);
-	// const [fontColor, setFontColor] = useState(fontColors[0]);
-	// const [backgroundColor, setBackgroundColor] = useState(backgroundColors[0]);
-	// const [contentWidth, setContentWidth] = useState(contentWidthArr[0]);
-	// const [fontSize, setFontSize] = useState(fontSizeOptions[0]);
+	const [formData, setFormData] = useState<ArticleStateType>({
+		fontFamilyOption: defaultArticleState.fontFamilyOption,
+		fontColor: defaultArticleState.fontColor,
+		backgroundColor: defaultArticleState.backgroundColor,
+		contentWidth: defaultArticleState.contentWidth,
+		fontSizeOption: defaultArticleState.fontSizeOption,
+	});
 
-	const [formData, setFormData] = useState<OptionProps | null>(null);
-
-	// const dataFromChild = {
-	// 	fontFamily,
-	// 	fontColor,
-	// 	backgroundColor,
-	// 	contentWidth,
-	// 	fontSize,
-	// };
-
-	// const setDataFromChild = {
-	// 	setFontFamily,
-	// 	setFontColor,
-	// 	setBackgroundColor,
-	// 	setContentWidth,
-	// 	setFontSize,
-	// };
-
-	const handleSubmit = (data: OptionProps) => {
+	const handleSubmit = (data: ArticleStateType) => {
 		setFormData(data);
-		console.log('Данные получены от дочернего компонента:', data);
-		console.log(formData);
 	};
 
 	return (
@@ -51,11 +30,11 @@ const App = () => {
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
+					'--font-family': formData.fontFamilyOption.value,
+					'--font-size': formData.fontSizeOption.value,
+					'--font-color': formData.fontColor.value,
+					'--container-width': formData.contentWidth.value,
+					'--bg-color': formData.backgroundColor.value,
 				} as CSSProperties
 			}>
 			<ArticleParamsForm onSubmit={handleSubmit} />
