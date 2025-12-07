@@ -40,9 +40,7 @@ export const Option = (props: OptionProps) => {
 			tabIndex={0}
 			data-testid={`select-option-${value}`}
 			ref={optionRef}>
-			<Text family={isFontFamilyClass(className) ? className : undefined}>
-				{title}
-			</Text>
+			<Text family={isFontFamilyClass(className) ? className : undefined}>{title}</Text>
 		</li>
 	);
 };
